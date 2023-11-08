@@ -1,5 +1,5 @@
 <?php require_once dirname(__FILE__) .'/../config.php';?>
-<!doctype html>
+<!DOCTYPE html>
 <html lang="pl">
 <head>
 
