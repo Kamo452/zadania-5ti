@@ -1,0 +1,32 @@
+body {
+    background-color: rgb(206, 206, 206);
+    font-family: Verdana;
+}
+#naglowek {
+    text-align: center;
+    background-image: radial-gradient(cyan, blue);
+    padding: 10px;
+}
+hr {
+    background-color: rgb(255, 255, 255);
+}
+#panel {
+    width: 50%;
+}
+input[type="text"] {
+    width: 40px;
+}
+input[type="submit"] {
+    background-image: radial-gradient(blue, cyan);
+    color: white;
+    padding: 10px;
+    margin: 15px;
+    border-radius: 10px;
+}
+input[type="submit"]:hover {
+    background-image: radial-gradient(cyan, blue);
+    color: black;
+    padding: 10px;
+    margin: 15px;
+    border-radius: 10px;
+}

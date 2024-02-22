@@ -1,0 +1,79 @@
+{extends file="../templates/main.html"}
+
+{block name=header}Strona główna kalkulatora | Kamil Bujara 5TI{/block}
+
+{block name=content}
+
+
+
+<div id="app_content" style="width:90%; margin: 2em auto; background-color: white; padding: 20px;">
+
+
+	<form class="pure-form pure-form-stacked" action="{$conf->app_url}/app/credit_calc.php" method="post">
+		<fieldset>
+			<label for="id_kwota">Kwota kredytu: </label>
+			<input id="id_kwota" min="1000" step="1000" max="250000" type="range" name="kwota" autocomplete="off" value="{$form->kwota}">
+			<font id="kwotaTekst">{$form->kwota}</font> <font id="dopisekPLN">{if isset({$form->kwota})} PLN  {/if}</font><br>
+	
+			<label for="id_oprocentowanie">Oprocentowanie: </label>
+			<input id="id_oprocentowanie" type="text" name="oprocentowanie" autocomplete="off" value="{$form->oprocentowanie}">
+			%
+			<br>
+	
+			<label for="id_czas">Czas spłaty: </label>
+			<input id="id_czas" min="3" max="120" type="range" name="czas" autocomplete="off" value="{$form->czas}">
+			<font id="czasTekst">{$form->czas}</font> <font id="dopisekMSC">{if isset({$form->czas})} MSC {/if}</font><br>
+			
+			<input type="submit" value="Oblicz" name="submit">
+		</fieldset>
+	
+		<script>
+			kwota = document.getElementById("id_kwota");
+			kwota.oninput = function() {
+				wartosc = this.value;
+				document.getElementById("kwotaTekst").innerHTML = wartosc;
+				document.getElementById("dopisekPLN").innerHTML = "PLN";
+			}
+	
+			czas = document.getElementById("id_czas");
+			czas.oninput = function() {
+				wartosc = this.value;
+				document.getElementById("czasTekst").innerHTML = wartosc;
+				document.getElementById("dopisekMSC").innerHTML = "MSC";
+			}
+		</script>
+	
+	</form>
+	<div class="messages">
+
+		{if $errorlist->isError()}
+				<div class="alert alert-danger"><span class="glyphicon glyphicon-remove"></span>
+				<strong>Wystąpił błąd: <br></strong><ul>
+				{foreach $errorlist->getErrors() as $err}
+				{strip}
+					<li>{$err}</li>
+				{/strip}
+				{/foreach}
+				</ul>
+				</div>
+		{/if}
+	
+	
+	
+		{if isset($result->result)}
+			<div class="alert alert-success"><span class="glyphicon glyphicon-ok-sign"></span>
+			<strong>Wynik: <br></strong>
+			Rata miesięczna: {$result->result} zł</div>
+		{/if}
+	
+	</div>
+
+    
+{/block}
+
+{block name=footer}
+
+<p>Kontakt: kamil@gadugadu.pl</p>
+<img src="{$conf->app_url}/img/banner.jpg" width="250px">
+
+{/block}
